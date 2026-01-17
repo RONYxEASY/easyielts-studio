@@ -1,13 +1,22 @@
+import type {Rule} from 'sanity'
+
 const commonFields = [
   {
     name: 'questionNumber',
     title: 'Question Number',
-    type: 'string', // String allows "1" or "1a"
-    validation: (Rule: {required: () => any}) => Rule.required(),
+    type: 'string',
+    validation: (rule: Rule) => rule.required(),
   },
   {
     name: 'questionText',
     title: 'Question Text',
+    type: 'text',
+    rows: 2,
+    validation: (rule: Rule) => rule.required(),
+  },
+  {
+    name: 'answerExplanation',
+    title: 'Answer Explanation',
     type: 'text',
     rows: 2,
   },

@@ -1,9 +1,12 @@
+import type {Rule} from 'sanity'
+
 const groupFields = [
   {
     name: 'groupTitle',
     title: 'Group Title',
     type: 'string',
     placeholder: 'Questions 1-4',
+    validation: (rule: Rule) => rule.required(),
   },
   {
     name: 'instructions',
@@ -11,6 +14,7 @@ const groupFields = [
     type: 'array',
     of: [{type: 'block'}],
     rows: 2,
+    validation: (rule: Rule) => rule.required(),
   },
 ]
 

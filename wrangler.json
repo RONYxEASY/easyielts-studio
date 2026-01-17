@@ -1,6 +1,5 @@
 {
-  "name": "studio-easyielts",
-  "main": "src/index.js",
+  "name": "easyielts-studio",
   "compatibility_date": "2026-01-17",
   "assets": {
     "directory": "./dist",
@@ -8,8 +7,5 @@
   },
   "vars": {
     "NODE_ENV": "development"
-  },
-  "build": {
-    "command": "npm run build"
   }
 }

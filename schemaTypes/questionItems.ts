@@ -15,6 +15,12 @@ const commonFields = [
     validation: (rule: Rule) => rule.required(),
   },
   {
+    name: 'correctAnswer',
+    title: 'Correct Answer',
+    description: 'The exact string match from options',
+    type: 'string',
+  },
+  {
     name: 'answerExplanation',
     title: 'Answer Explanation',
     type: 'text',
@@ -33,12 +39,6 @@ export const mcqItem = {
       title: 'Options',
       type: 'array',
       of: [{type: 'string'}],
-    },
-    {
-      name: 'correctAnswer',
-      title: 'Correct Answer',
-      description: 'The exact string match from options',
-      type: 'string',
     },
   ],
 }
@@ -103,24 +103,102 @@ export const doubleMcqItem = {
   },
 }
 
+// export const fillBlankItem = {
+//   name: 'fillBlankItem',
+//   title: 'Fill in Blank Question',
+//   type: 'object',
+//   fields: [
+//     ...commonFields,
+//     {
+//       name: 'questionText2',
+//       title: 'Question Text Part 2',
+//       type: 'text',
+//       rows: 2,
+//     },
+//   ],
+// }
+//
+// inside your schema file (e.g., questions.ts)
+
 export const fillBlankItem = {
   name: 'fillBlankItem',
   title: 'Fill in Blank Question',
   type: 'object',
   fields: [
-    ...commonFields,
     {
-      name: 'questionText2',
-      title: 'Question Text Part 2',
+      name: 'questionNumber',
+      title: 'Question Number',
+      type: 'string',
+      validation: (rule: Rule) => rule.required(),
+    },
+    // 1. Layout Selector
+    {
+      name: 'layout',
+      title: 'Layout Style',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Simple Sentence', value: 'sentence'},
+          {title: 'Note/List Item', value: 'note'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'sentence',
+    },
+
+    // 2. Note-Specific Fields (Hidden unless layout is 'note')
+    {
+      name: 'noteLabel',
+      title: 'Note Label',
+      description: 'The text next to the number (e.g., "Feeding" in "14. Feeding")',
+      type: 'string',
+      hidden: ({parent}: {parent: any}) => parent?.layout !== 'note',
+    },
+    {
+      name: 'contextBefore',
+      title: 'Bullet Points Before',
+      description: 'List items that appear above the question line',
+      type: 'array',
+      of: [{type: 'string'}],
+      hidden: ({parent}: {parent: any}) => parent?.layout !== 'note',
+    },
+
+    // 3. The Question Line (Used for both layouts)
+    {
+      name: 'questionText',
+      title: 'Text Before Blank',
+      description: 'e.g., "trees are awesome, such as"',
       type: 'text',
       rows: 2,
     },
     {
-      name: 'correctAnswer',
-      title: 'Correct Answer(s)',
-      description: 'Add acceptable variations (e.g., "10", "ten")',
+      name: 'questionText2',
+      title: 'Text After Blank',
+      description: 'e.g., "something."',
+      type: 'text',
+      rows: 2,
+    },
+
+    // 4. Context After (For notes)
+    {
+      name: 'contextAfter',
+      title: 'Bullet Points After',
+      description: 'List items that appear below the question line',
       type: 'array',
       of: [{type: 'string'}],
+      hidden: ({parent}: {parent: any}) => parent?.layout !== 'note',
+    },
+
+    {
+      name: 'correctAnswer',
+      title: 'Correct Answer(s)',
+      type: 'text',
+    },
+    {
+      name: 'answerExplanation',
+      title: 'Answer Explanation',
+      type: 'text',
+      rows: 2,
     },
   ],
 }
@@ -129,17 +207,7 @@ export const trueFalseItem = {
   name: 'trueFalseItem',
   title: 'True/False/NG Question',
   type: 'object',
-  fields: [
-    ...commonFields,
-    {
-      name: 'correctAnswer',
-      title: 'Correct Answer',
-      type: 'string',
-      options: {
-        list: ['True', 'False', 'Not Given', 'Yes', 'No'],
-      },
-    },
-  ],
+  fields: [...commonFields],
 }
 
 export const dropDownItem = {
@@ -154,11 +222,6 @@ export const dropDownItem = {
       type: 'array',
       of: [{type: 'string'}],
     },
-    {
-      name: 'correctAnswer',
-      title: 'Correct Answer',
-      type: 'string',
-    },
   ],
 }
 
@@ -166,13 +229,5 @@ export const dragDropItem = {
   name: 'dragDropItem',
   title: 'Drag & Drop Position',
   type: 'object',
-  fields: [
-    ...commonFields,
-    {
-      name: 'correctAnswer',
-      title: 'Correct Option',
-      description: 'Which option from the global list belongs here?',
-      type: 'string',
-    },
-  ],
+  fields: [...commonFields],
 }

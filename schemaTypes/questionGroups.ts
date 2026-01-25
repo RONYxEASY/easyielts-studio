@@ -70,6 +70,14 @@ export const doubleMcqBlock = {
   type: 'object',
   fields: [
     {
+      name: 'questionRange',
+      title: 'Question Numbers (Visual Label)',
+      description: 'Appears above the question text (e.g., "Questions 23 & 24")',
+      type: 'string',
+      placeholder: '23-24',
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
       name: 'questionPrompt',
       title: 'Global Question Title',
       description:

@@ -3,6 +3,7 @@ import readingTest from './readingTest'
 import {
   mcqGroup,
   doubleMcqGroup,
+  doubleMcqBlock,
   fillBlankGroup,
   trueFalseGroup,
   dropDownGroup,
@@ -25,6 +26,7 @@ export const schemaTypes = [
   // Question Groups
   mcqGroup,
   doubleMcqGroup,
+  doubleMcqBlock,
   fillBlankGroup,
   trueFalseGroup,
   dropDownGroup,

@@ -33,6 +33,21 @@ export const mcqGroup = {
   ],
 }
 
+// export const doubleMcqGroup = {
+//   name: 'doubleMcqGroup',
+//   title: 'Double MCQ Group',
+//   type: 'object',
+//   fields: [
+//     ...groupFields,
+//     {
+//       name: 'questions',
+//       title: 'Questions',
+//       type: 'array',
+//       of: [{type: 'doubleMcqItem'}],
+//     },
+//   ],
+// }
+
 export const doubleMcqGroup = {
   name: 'doubleMcqGroup',
   title: 'Double MCQ Group',
@@ -41,11 +56,58 @@ export const doubleMcqGroup = {
     ...groupFields,
     {
       name: 'questions',
-      title: 'Questions',
+      title: 'MCQ Sets',
       type: 'array',
-      of: [{type: 'doubleMcqItem'}],
+      // We now reference the Block (Subgroup) instead of the Item directly
+      of: [{type: 'doubleMcqBlock'}],
     },
   ],
+}
+
+export const doubleMcqBlock = {
+  name: 'doubleMcqBlock',
+  title: 'Double MCQ Block',
+  type: 'object',
+  fields: [
+    {
+      name: 'questionPrompt',
+      title: 'Global Question Title',
+      description:
+        'The main question asking the user to select options (e.g., "Which TWO factors contributed to...")',
+      type: 'text',
+      rows: 2,
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
+      name: 'globalOptions',
+      title: 'Global Options',
+      description: 'The list of choices (A, B, C, D, E) shared by the questions below.',
+      type: 'array',
+      of: [{type: 'string'}],
+      validation: (rule: Rule) => rule.min(3),
+    },
+    {
+      name: 'items',
+      title: 'Questions/Answer Slots',
+      description: 'Add the 2 specific question slots here (e.g., Q21 and Q22).',
+      type: 'array',
+      of: [{type: 'doubleMcqItem'}],
+      validation: (rule: Rule) =>
+        rule.min(2).max(2).warning('Double MCQs usually have exactly 2 answer slots.'),
+    },
+  ],
+  preview: {
+    select: {
+      title: 'questionPrompt',
+      options: 'globalOptions',
+    },
+    prepare({title, options}: {title?: string; options?: string[]}) {
+      return {
+        title: title ? `${title.substring(0, 30)}...` : 'Block',
+        subtitle: `${options ? options.length : 0} Options`,
+      }
+    },
+  },
 }
 
 export const fillBlankGroup = {

@@ -43,26 +43,64 @@ export const mcqItem = {
   ],
 }
 
+// export const doubleMcqItem = {
+//   name: 'doubleMcqItem',
+//   title: 'Double MCQ Question',
+//   type: 'object',
+//   fields: [
+//     ...commonFields,
+//     {
+//       name: 'options',
+//       title: 'Options',
+//       type: 'array',
+//       of: [{type: 'string'}],
+//     },
+//     {
+//       name: 'correctAnswer',
+//       title: 'Correct Answer',
+//       description: 'Select multiple correct answers',
+//       type: 'array',
+//       of: [{type: 'string'}],
+//     },
+//   ],
+// }
 export const doubleMcqItem = {
   name: 'doubleMcqItem',
-  title: 'Double MCQ Question',
+  title: 'Question Slot',
   type: 'object',
   fields: [
-    ...commonFields,
     {
-      name: 'options',
-      title: 'Options',
-      type: 'array',
-      of: [{type: 'string'}],
+      name: 'questionNumber',
+      title: 'Question Number',
+      type: 'string', // e.g., "21"
+      validation: (rule: Rule) => rule.required(),
     },
     {
       name: 'correctAnswer',
       title: 'Correct Answer',
-      description: 'Select multiple correct answers',
-      type: 'array',
-      of: [{type: 'string'}],
+      description: 'The correct option string for this specific number',
+      type: 'string',
+      validation: (rule: Rule) => rule.required(),
+    },
+    {
+      name: 'answerExplanation',
+      title: 'Answer Explanation',
+      type: 'text',
+      rows: 2,
     },
   ],
+  preview: {
+    select: {
+      title: 'questionNumber',
+      subtitle: 'correctAnswer',
+    },
+    prepare({title, subtitle}: {title?: string; subtitle?: string}) {
+      return {
+        title: `Q ${title}`,
+        subtitle: `Answer: ${subtitle}`,
+      }
+    },
+  },
 }
 
 export const fillBlankItem = {

@@ -9,6 +9,30 @@ const groupFields = [
     validation: (rule: Rule) => rule.required(),
   },
   {
+    name: 'poster',
+    title: 'Group Image',
+    description: '(optional)',
+    type: 'image',
+    options: {
+      hotspot: true,
+    },
+    fields: [
+      {
+        name: 'caption',
+        title: 'Caption',
+        placeholder: 'Map',
+        type: 'string',
+      },
+      {
+        name: 'altText',
+        title: 'Alt Text',
+        description: 'Description of Image for accessibility and seo.',
+        placeholder: 'Map of small town with narrow roads',
+        type: 'string',
+      },
+    ],
+  },
+  {
     name: 'instructions',
     title: 'Instructions',
     type: 'array',
@@ -33,21 +57,6 @@ export const mcqGroup = {
   ],
 }
 
-// export const doubleMcqGroup = {
-//   name: 'doubleMcqGroup',
-//   title: 'Double MCQ Group',
-//   type: 'object',
-//   fields: [
-//     ...groupFields,
-//     {
-//       name: 'questions',
-//       title: 'Questions',
-//       type: 'array',
-//       of: [{type: 'doubleMcqItem'}],
-//     },
-//   ],
-// }
-
 export const doubleMcqGroup = {
   name: 'doubleMcqGroup',
   title: 'Double MCQ Group',
@@ -58,7 +67,6 @@ export const doubleMcqGroup = {
       name: 'questions',
       title: 'MCQ Sets',
       type: 'array',
-      // We now reference the Block (Subgroup) instead of the Item directly
       of: [{type: 'doubleMcqBlock'}],
     },
   ],

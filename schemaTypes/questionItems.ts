@@ -229,5 +229,14 @@ export const dragDropItem = {
   name: 'dragDropItem',
   title: 'Drag & Drop Position',
   type: 'object',
-  fields: [...commonFields],
+  fields: [
+    ...commonFields,
+    {
+      name: 'questionText2',
+      title: 'Text After Blank',
+      description: 'e.g., "something."',
+      type: 'text',
+      rows: 2,
+    },
+  ],
 }

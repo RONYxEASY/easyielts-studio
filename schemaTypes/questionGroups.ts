@@ -114,12 +114,12 @@ export const doubleMcqBlock = {
   ],
   preview: {
     select: {
-      title: 'questionPrompt',
+      title: 'questionRange',
       options: 'globalOptions',
     },
     prepare({title, options}: {title?: string; options?: string[]}) {
       return {
-        title: title ? `${title.substring(0, 30)}...` : 'Block',
+        title: title ? `${title.substring(0, 30)}` : 'Block',
         subtitle: `${options ? options.length : 0} Options`,
       }
     },

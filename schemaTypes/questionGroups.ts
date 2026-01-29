@@ -16,21 +16,6 @@ const groupFields = [
     options: {
       hotspot: true,
     },
-    fields: [
-      {
-        name: 'caption',
-        title: 'Caption',
-        placeholder: 'Map',
-        type: 'string',
-      },
-      {
-        name: 'altText',
-        title: 'Alt Text',
-        description: 'Description of Image for accessibility and seo.',
-        placeholder: 'Map of small town with narrow roads',
-        type: 'string',
-      },
-    ],
   },
   {
     name: 'instructions',

@@ -49,6 +49,14 @@ export default {
               validation: (Rule: any) => Rule.required(),
             },
             {
+              name: 'taskImage',
+              title: 'Task Image (Optional)',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            },
+            {
               name: 'wordLimit',
               title: 'Word Limit',
               type: 'string',

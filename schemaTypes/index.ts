@@ -1,6 +1,7 @@
 import {categorySchema} from './categories'
 import readingTest from './readingTest'
 import listeningTest from './listeningTest'
+import writingTest from './writingTest'
 
 import {
   mcqGroup,
@@ -25,6 +26,7 @@ export const schemaTypes = [
   categorySchema,
   readingTest,
   listeningTest,
+  writingTest,
 
   // Question Groups
   mcqGroup,

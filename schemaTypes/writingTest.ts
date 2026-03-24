@@ -44,8 +44,8 @@ export default {
             {
               name: 'prompt',
               title: 'Task Prompt',
-              type: 'text',
-              rows: 10,
+              type: 'array',
+              of: [{type: 'block'}],
               validation: (Rule: any) => Rule.required(),
             },
             {
@@ -59,8 +59,8 @@ export default {
             {
               name: 'wordLimit',
               title: 'Word Limit',
-              type: 'string',
-              initialValue: '150',
+              type: 'number',
+              initialValue: 150,
               validation: (Rule: any) => Rule.required(),
             },
           ],

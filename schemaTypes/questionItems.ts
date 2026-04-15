@@ -19,6 +19,7 @@ const commonFields = [
     title: 'Correct Answer',
     description: 'The exact string match from options',
     type: 'string',
+    validation: (rule: Rule) => rule.required(),
   },
   {
     name: 'answerExplanation',

@@ -21,11 +21,15 @@ import {
   dropDownItem,
   dragDropItem,
 } from './questionItems'
+import shortReadingTest from './shortReadingTest'
+import shortListeningTest from './shortListeningTest'
 
 export const schemaTypes = [
   categorySchema,
   readingTest,
+  shortReadingTest,
   listeningTest,
+  shortListeningTest,
   writingTest,
 
   // Question Groups
